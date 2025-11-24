@@ -1,0 +1,7 @@
+flask
+flask-socketio
+pandas
+numpy
+python-dotenv
+google-generativeai
+eventlet
