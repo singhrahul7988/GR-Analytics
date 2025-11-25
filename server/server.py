@@ -495,8 +495,8 @@ def handle_connect():
     socketio.start_background_task(run_race)
 
 
-if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000, allow_unsafe_werkzeug=True)
+ #if __name__ == "__main__":
+   # socketio.run(app, host="0.0.0.0", port=5000, allow_unsafe_werkzeug=True) 
 
 if __name__ == "__main__":
     # Get the PORT from environment variables (Render sets this)
