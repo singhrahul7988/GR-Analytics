@@ -497,3 +497,10 @@ def handle_connect():
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5000, allow_unsafe_werkzeug=True)
+
+if __name__ == "__main__":
+    # Get the PORT from environment variables (Render sets this)
+    port = int(os.environ.get("PORT", 5000))
+    # Remove 'allow_unsafe_werkzeug' for production if possible, but it's okay for hackathons
+    socketio.run(app, host="0.0.0.0", port=port)
+
