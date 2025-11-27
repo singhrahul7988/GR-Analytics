@@ -31,6 +31,19 @@ Prereqs: Python 3.10+ and Node.js 18+ with npm.
 - `npm run dev`
 - Vite will print a local URL (usually `http://localhost:5173`). The client will reach the backend at `http://localhost:5000` unless you set `VITE_SOCKET_URL`.
 
+Dashboard overview (at a glance)
+--------------------------------
+![Dashboard](client/src/assets/Dashboard.png)
+
+- Header: session name, REC indicator, current lap/total laps, and UTC clock.
+- Engine: speed, RPM bar, and current gear.
+- Tire Model: tire health per corner with a simple car outline.
+- Track Map: live GPS position, sector markers, and labels.
+- Telemetry Graphs: speed/RPM trace plus throttle/brake overlay (live).
+- Dynamics: weather tiles (ambient/track temp, wind, humidity), g-circle, and pedals.
+- Session Insights: best/avg lap, latest-vs-best delta, sector bests, top speed, pits, consistency.
+- Strategy Log: streaming alerts/coaching messages.
+
 Notes for judges/demos
 ----------------------
 - If you keep the provided CSVs in `data/Barber/`, the dashboard replays real laps; otherwise it auto-switches to a smooth simulated feed.
