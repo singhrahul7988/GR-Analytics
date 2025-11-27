@@ -31,7 +31,7 @@ Prereqs: Python 3.10+ and Node.js 18+ with npm.
 - `npm run dev`
 - Vite will print a local URL (usually `http://localhost:5173`). The client will reach the backend at `http://localhost:5000` unless you set `VITE_SOCKET_URL`.
 
-Dashboard overview (at a glance)
+Dashboard Overview 
 --------------------------------
 ![Dashboard](client/src/assets/Dashboard.png)
 
