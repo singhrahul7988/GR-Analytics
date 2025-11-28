@@ -12,7 +12,7 @@ Project layout
 - `server/server.py` – streams telemetry ticks and weather snapshots over Socket.IO (10 Hz). Falls back to a synthetic feed if the CSV at `data/Barber/telemetry_r1.csv` is not found.
 - `server/requirements.txt` – Python deps: Flask, Flask-SocketIO, Pandas, NumPy, Eventlet, etc.
 - `client/` – React dashboard (Vite). Connects to the backend via `VITE_SOCKET_URL` (defaults to `http://localhost:5000`).
-- `data/Barber/` – sample telemetry + weather files used for local replay.
+- `data/Barber/` – Race 1: telemetry data + weather files used for local replay.
 
 Run it locally (two terminals)
 ------------------------------
