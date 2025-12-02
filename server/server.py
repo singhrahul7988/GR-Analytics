@@ -759,15 +759,15 @@ def run_race():
                 if max(recent) - min(recent) > 0.8:
                     alerts.append({"msg": "Lap variance high; stabilize braking points.", "type": "info"})
             # Live session insights
-            lap_times_history.append({"lap": current_lap, "seconds": lap_duration_this})
+            lap_times_history.append({"lap": current_lap, "seconds": lap_duration_used})
             lap_times_history = lap_times_history[-120:]
             if current_lap >= stats_start_lap:
-                lap_duration_records.append((current_lap, lap_duration_this))
+                lap_duration_records.append((current_lap, lap_duration_used))
                 lap_duration_records[:] = lap_duration_records[-120:]
-            filtered = [(ln, t) for ln, t in lap_duration_records if ln >= stats_start_lap]
+            filtered = [(ln, t) for ln, t in lap_duration_records if ln >= stats_start_lap and t is not None]
             best_lap_val = min([t for _, t in filtered], default=None)
             avg_lap_val = (sum([t for _, t in filtered]) / len(filtered)) if filtered else None
-            latest_vs_best = lap_duration_this - best_lap_val if best_lap_val else None
+            latest_vs_best = lap_duration_used - best_lap_val if best_lap_val else None
             consistency_std = float(np.std([t for _, t in filtered][-5:])) if len(filtered) >= 2 else None
             # Compute best sectors up to the current lap using recorded sector splits (only laps >= stats_start_lap)
             # NOTE: This will be updated during the live sector bests block below; for now just initialize
@@ -848,8 +848,15 @@ def run_race():
 
         lap_finished = lap_crossed or lap_crossed_data or reached_end
         if lap_finished:
-            if lap_duration_this:
-                last_lap_duration = lap_duration_this
+            # Use authoritative lap time from analysis if available
+            lap_time_from_analysis = analysis_lap_map.get(current_lap, {}).get("lap")
+            if isinstance(lap_time_from_analysis, (int, float)) and lap_time_from_analysis > 0:
+                lap_duration_used = lap_time_from_analysis
+            else:
+                lap_duration_used = lap_duration_this
+
+            if lap_duration_used:
+                last_lap_duration = lap_duration_used
             if reached_end:
                 current_lap += 1
                 if telemetry_data is not None:
